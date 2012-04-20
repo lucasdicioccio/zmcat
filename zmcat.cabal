@@ -1,0 +1,47 @@
+name:               zmcat
+version:            0.1
+synopsis:
+    Command-line tool for ZeroMQ.
+Description:
+    ZeroMQ is a handy way to communicate between applications:
+    .
+    [Rationale:] Zmcat is an handy command-line tool to debug or communicate
+        with ZeroMQ applications from the shell.
+    .
+    [Limitations:]
+        So far, only ZeroMQ protocol version 2 and PUB, SUB, PULL, and PUSH are supported.
+    Another limitation is that Zmcat only supports printable text. Support for 
+    random binary streams and ZeroMQ protocol version 3 will come later.
+    .
+license:            BSD3
+license-file:       LICENSE
+author:             Lucas DiCioccio
+maintainer:         lucas@dicioccio.fr
+copyright:          Copyright (c) 2012 Lucas DiCioccio
+category:           Network
+build-type:         Simple
+cabal-version:      >=1.8
+
+homepage:           https://github.com/lucasdicioccio/zmcat
+bug-reports:        https://github.com/lucasdicioccio/zmcat/issues
+
+source-repository head
+  type:     git
+  location: https://github.com/lucasdicioccio/zmcat
+
+library
+  hs-source-dirs:   src
+  ghc-options:      -Wall
+  ghc-prof-options: -auto-all
+  exposed-modules:  Network.Zmcat
+  build-depends:    bytestring,
+                    base,
+                    zeromq-haskell == 0.8.*
+
+executable zmcat
+    main-is: bin/Zmcat.hs
+    build-depends: base,
+                   zmcat,
+                   haskell98
+    ghc-options: -Wall -rtsopts
+    ghc-prof-options: -auto-all
