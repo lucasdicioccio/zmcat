@@ -3,7 +3,7 @@ module Main where
 
 import System.Exit (exitFailure)
 import System.IO
-import System (getArgs)
+import System.Environment (getArgs)
 
 import Network.Zmcat
 

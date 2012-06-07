@@ -2,20 +2,23 @@
 module Network.Zmcat where
 
 import System.ZMQ
-import Control.Monad (forM_,forever,liftM)
+import Control.Monad (forever)
 import Data.ByteString.Char8 (pack, unpack)
 import System.IO
 
+runCtx :: SType a1 => a1 -> (Socket a1 -> IO a) -> IO a
 runCtx t blk = withContext 1 $ \ctx -> do
         withSocket ctx t $ \skt -> do
             blk skt
 
+pub :: String -> String -> IO a
 pub uri k = runCtx Pub $ \skt -> do
         bind skt uri
         forever $ do
             pkt <- hGetLine stdin
             send skt (pack $ k ++ pkt) []
 
+sub :: String -> String -> IO a
 sub uri k = runCtx Sub $ \skt -> do
         subscribe skt k
         connect skt uri
@@ -24,6 +27,7 @@ sub uri k = runCtx Sub $ \skt -> do
             putStrLn $ drop (length k) (unpack line)
             hFlush stdout
                 
+pull :: String -> IO a
 pull uri = runCtx Pull $ \skt -> do
         bind skt uri
         forever $ do
@@ -31,6 +35,7 @@ pull uri = runCtx Pull $ \skt -> do
             putStrLn $ unpack line
             hFlush stdout
 
+push :: String -> IO a
 push uri = runCtx Push $ \skt -> do
         connect skt uri
         forever $ do

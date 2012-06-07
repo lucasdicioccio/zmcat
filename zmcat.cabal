@@ -41,7 +41,6 @@ library
 executable zmcat
     main-is: bin/Zmcat.hs
     build-depends: base,
-                   zmcat,
-                   haskell98
+                   zmcat
     ghc-options: -Wall -rtsopts
     ghc-prof-options: -auto-all
