@@ -42,3 +42,22 @@ push uri = runCtx Push $ \skt -> do
             pkt <- hGetLine stdin
             send skt (pack pkt) []
 
+rep :: String -> IO a
+rep uri = runCtx Rep $ \skt -> do
+    bind skt uri
+    forever $ do
+        line <- receive skt []
+        putStrLn $ unpack line
+        hFlush stdout
+        pkt <- hGetLine stdin
+        send skt (pack pkt) []
+
+req :: String -> IO a
+req uri = runCtx Req $ \skt -> do
+    connect skt uri
+    forever $ do
+        pkt <- hGetLine stdin
+        send skt (pack pkt) []
+        line <- receive skt []
+        putStrLn $ unpack line
+        hFlush stdout

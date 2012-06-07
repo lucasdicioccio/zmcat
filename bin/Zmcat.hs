@@ -17,5 +17,7 @@ main = do
 		["sub", uri] 		-> sub uri ""
 		["push", uri] 		-> push uri
 		["pull", uri] 		-> pull uri
+		["req", uri] 		-> req uri
+		["rep", uri] 		-> rep uri
 		_	  		-> (hPutStrLn stderr usage) >> exitFailure
-	where usage = "cli <pub|sub|push|pull> <uri> [key-for-pub-or-sub='']"
+	where usage = "cli <pub|sub|push|pull|rep|req> <uri> [key-for-pub-or-sub='']"
