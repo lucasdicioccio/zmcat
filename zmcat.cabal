@@ -7,17 +7,18 @@ Description:
     .
     [Rationale:] Zmcat is an handy command-line tool to debug or communicate
         with ZeroMQ applications from the shell.
+    One use of zmcat is to easily audit, monitor, add cron-jobs shell scripts
+    which speak zmq.
     .
     [Limitations:]
-        So far, only ZeroMQ protocol version 2 and PUB, SUB, PULL, and PUSH are supported.
-    Another limitation is that Zmcat only supports printable text. Support for 
-    random binary streams and ZeroMQ protocol version 3 will come later.
+    A limitation is that Zmcat only supports printable text. Support for 
+    random binary streams will come later.
     .
 license:            BSD3
 license-file:       LICENSE
 author:             Lucas DiCioccio
 maintainer:         lucas@dicioccio.fr
-copyright:          Copyright (c) 2012 Lucas DiCioccio
+copyright:          Copyright (c) 2013 Lucas DiCioccio
 category:           Network
 build-type:         Simple
 cabal-version:      >=1.8
@@ -35,12 +36,12 @@ library
   ghc-prof-options: -auto-all
   exposed-modules:  Network.Zmcat
   build-depends:    bytestring,
-                    base,
+                    base >= 4.5.1.0 && < 5,
                     zeromq3-haskell >= 0.3.1
 
 executable zmcat
     main-is: bin/Zmcat.hs
-    build-depends: base,
+    build-depends: base >= 4.5.1.0 && < 5,
                    zmcat,
                    bytestring
     ghc-options: -Wall -rtsopts
