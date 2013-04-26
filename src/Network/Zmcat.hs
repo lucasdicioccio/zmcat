@@ -3,6 +3,7 @@ module Network.Zmcat where
 
 import System.ZMQ3
 import Control.Monad (forever)
+import qualified Data.ByteString as BS
 import Data.ByteString.Char8 (pack, unpack)
 import System.IO
 
@@ -18,13 +19,13 @@ pub uri k = runCtx Pub $ \skt -> do
             pkt <- hGetLine stdin
             send skt [] (pack $ k ++ pkt)
 
-sub :: String -> String -> IO a
+sub :: String -> BS.ByteString -> IO a
 sub uri k = runCtx Sub $ \skt -> do
         subscribe skt k
         connect skt uri
         forever $ do
             line <- receive skt
-            putStrLn $ drop (length k) (unpack line)
+            putStrLn $ drop (BS.length k) (unpack line)
             hFlush stdout
                 
 pull :: String -> IO a

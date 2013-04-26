@@ -1,9 +1,11 @@
+{-# LANGUAGE OverloadedStrings #-}
 
 module Main where
 
 import System.Exit (exitFailure)
 import System.IO
 import System.Environment (getArgs)
+import qualified Data.ByteString.Char8 as C
 
 import Network.Zmcat
 
@@ -12,7 +14,7 @@ main = do
 	args  <- getArgs
 	case args of
 		["pub", uri, k]		-> pub uri k
-		["sub", uri, k] 	-> sub uri k
+		["sub", uri, k] 	-> sub uri $ C.pack k
 		["pub", uri]		-> pub uri ""
 		["sub", uri] 		-> sub uri ""
 		["push", uri] 		-> push uri
