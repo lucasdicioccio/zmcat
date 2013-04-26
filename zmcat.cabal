@@ -1,5 +1,5 @@
 name:               zmcat
-version:            0.1
+version:            0.2
 synopsis:
     Command-line tool for ZeroMQ.
 Description:
