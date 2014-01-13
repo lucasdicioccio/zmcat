@@ -11,3 +11,7 @@ A simple command tool to test ZMQ pub-sub and push-pull sockets.
 
 	zmcat push tcp://localhost:5555
 	zmcat pull tcp://*:5555
+	
+# Contributions
+
+Gísli Kristjánsson (gislik): multipart messages
