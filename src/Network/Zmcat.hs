@@ -4,6 +4,7 @@ module Network.Zmcat where
 import System.ZMQ3
 import Control.Monad (forever)
 import qualified Data.ByteString as BS
+import qualified Data.ByteString.Char8 as C
 import Data.ByteString.Char8 (pack, unpack)
 import System.IO
 
@@ -59,6 +60,6 @@ req uri = runCtx Req $ \skt -> do
     forever $ do
         pkt <- hGetLine stdin
         send skt [] (pack pkt)
-        line <- receive skt
-        putStrLn $ unpack line
+        lines' <- receiveMulti skt
+        mapM_ C.putStrLn lines'
         hFlush stdout
