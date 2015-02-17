@@ -37,7 +37,7 @@ library
   exposed-modules:  Network.Zmcat
   build-depends:    bytestring,
                     base >= 4.5.1.0 && < 5,
-                    zeromq3-haskell >= 0.3.1
+                    zeromq4-haskell >= 0.6.3
 
 executable zmcat
     main-is: bin/Zmcat.hs
