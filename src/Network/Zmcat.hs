@@ -1,7 +1,7 @@
 
 module Network.Zmcat where
 
-import System.ZMQ3
+import System.ZMQ4
 import Control.Monad (forever)
 import qualified Data.ByteString as BS
 import qualified Data.ByteString.Char8 as C
